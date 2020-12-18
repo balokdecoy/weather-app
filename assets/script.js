@@ -8,3 +8,11 @@ $.ajax({
 }).then(function (response) { 
     console.log(response);
  })
+
+ $(document).ready(function () {
+    $('#submit').click(function (e) { 
+        e.preventDefault();
+        console.log($('#citySearch').val());
+    });
+ });
+ 

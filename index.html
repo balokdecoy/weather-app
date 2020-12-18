@@ -41,16 +41,18 @@
         <div class='row'>
             <div class='col-3'>
                 <p class='searchHead'>Search for a City:</p>
-                <input type="text" class="form-control" placeholder="Baltimore" style="width: 75%;">
-                <button class="btn btn-primary" type="submit">
+                <input type="text" class="form-control" placeholder="City" style="width: 75%;" id="citySearch">
+                <button class="btn btn-primary" type="submit" id="submit">
                     <i class="fas fa-search"></i>
                 </button>
+                <div class="history"></div>
             </div>
+
             <div class="col-9">
                 <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Today's Forecast</h5>
-                    <p class="card-text"></p>
+                    <p class="card-text" id="todayForecast"></p>
                 </div>
                 </div>
             </div>
