@@ -12,6 +12,7 @@
             method: 'GET',
             datatType: 'jsonp',
         }).then(function (response) { 
+            clearContents();
             console.log(response);
             var cityWeather = $("<div class=cityWeather>");
             var current = $('<p>').text(response.name);
@@ -21,6 +22,10 @@
          })
     });
  });
+
+ function clearContents() {
+     $('#todayForecast').text('');
+ }
 
 
  // Req for current conditions: 
