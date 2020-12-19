@@ -1,4 +1,5 @@
-
+// Set date
+var currentDate = dayjs().format('MM/DD/YYYY');
 
  $(document).ready(function () {
     $('#submit').click(function (e) { 
@@ -17,7 +18,7 @@
             // Create div where current conditions will render
             var cityWeather = $("<div class=cityWeather>");
             // Location
-            var current = $('<h1>').text(response.name);
+            var current = $('<h1>').text(response.name + " " + "(" + currentDate + ")");
             // Temperature
             var temp = $('<p>').text('Temp: ' + response.main.temp + ' \u2109');
             // Weather conditions
