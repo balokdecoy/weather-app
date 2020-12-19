@@ -17,7 +17,7 @@
             // Create div where current conditions will render
             var cityWeather = $("<div class=cityWeather>");
             // Location
-            var current = $('<p>').text(response.name);
+            var current = $('<h1>').text(response.name);
             // Temperature
             var temp = $('<p>').text('Temp: ' + response.main.temp + ' \u2109');
             // Weather conditions
