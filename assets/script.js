@@ -108,19 +108,23 @@ $(document).ready(function () {
         }).then(function(fiveData) {
             console.log(fiveData);
             for (var i = 1; i < 6; i++) {
-                console.log(fiveData.daily[i].weather[0].main);
+                // Set five day forecast variables
                 var dayDiv = $('<div class=col-2></div>')
+                var day = dayjs().date();
+                var adjDay = (day + i);
+                var month = dayjs().format('MM');
+                var year = dayjs().format('YYYY');
+                var dayDisp = $('<p>' + month + '/' + adjDay + '/' + year + '</p>');
                 var maxTemp = $('<p>High: ' + fiveData.daily[i].temp.max + '\u2109</p>');
                 var minTemp = $('<p>Low: ' + fiveData.daily[i].temp.min + '\u2109</p>');
                 var dayHumid = $('<p>Humidity: ' + fiveData.daily[i].humidity + '%</p>');
                 var dayImg = $('<img src="https://openweathermap.org/img/wn/' + fiveData.daily[i].weather[0].icon + '@2x.png" alt="weather icon">');
 
-                $(dayDiv).append(dayImg, maxTemp, minTemp, dayHumid);
+                // Add five day forecast variables to div, add div to html
+                $(dayDiv).append(dayDisp, dayImg, maxTemp, minTemp, dayHumid);
                 $(dayDiv).addClass('card');
-                //$(dayDiv).attr('style', 'width: 18rem;');
                 $('.cardSpread').append(dayDiv);
             }
-
         })
     }
 
