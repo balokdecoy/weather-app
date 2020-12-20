@@ -8,9 +8,9 @@ var apiKey = '31935cf21b5d358b8ba4c4da65b29118';
 var cityWeather = $("<div class=cityWeather>");
 
 $(document).ready(function () {
-    var pastCity = localStorage.getItem('city');
-    console.log(pastCity);
-    getLocalWeather(pastCity);
+    // var prevCity = localStorage.getItem('city');
+    // console.log(prevCity);
+    // getLocalWeather(prevCity);
     $('#submit').click(function (e) { 
         e.preventDefault();
         $('.card').attr('style', 'visibility: visible');
@@ -107,6 +107,10 @@ $(document).ready(function () {
             method: 'GET',
         }).then(function(fiveData) {
             console.log(fiveData);
+            for (var i = 0; i < 5; i++) {
+                console.log(fiveData.daily[i].weather[0].main);
+                
+            }
 
         })
     }
