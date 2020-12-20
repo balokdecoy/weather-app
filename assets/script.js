@@ -101,7 +101,7 @@ $(document).ready(function () {
     }
 
     function getFive(long, lat) {
-        var fiveQuery = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&appid=' + apiKey;
+        var fiveQuery = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&units=imperial&appid=' + apiKey;
         $.ajax({
             url: fiveQuery,
             method: 'GET',
@@ -109,9 +109,15 @@ $(document).ready(function () {
             console.log(fiveData);
             for (var i = 1; i < 6; i++) {
                 console.log(fiveData.daily[i].weather[0].main);
-                var dayDiv = $('<div class=col-2>Hello world</div>')
+                var dayDiv = $('<div class=col-2></div>')
+                var maxTemp = $('<p>High: ' + fiveData.daily[i].temp.max + '\u2109</p>');
+                var minTemp = $('<p>Low: ' + fiveData.daily[i].temp.min + '\u2109</p>');
+                var dayHumid = $('<p>Humidity: ' + fiveData.daily[i].humidity + '%</p>');
+                var dayImg = $('<img src="https://openweathermap.org/img/wn/' + fiveData.daily[i].weather[0].icon + '@2x.png" alt="weather icon">');
+
+                $(dayDiv).append(dayImg, maxTemp, minTemp, dayHumid);
                 $(dayDiv).addClass('card');
-                $(dayDiv).attr('style', 'width: 18rem;');
+                //$(dayDiv).attr('style', 'width: 18rem;');
                 $('.cardSpread').append(dayDiv);
             }
 
@@ -132,3 +138,4 @@ $(document).ready(function () {
  // Could set value equal to city name
  // getLocalData();
  // getUvIndex();
+ //  fiveData.daily[i].temp.max + 
