@@ -63,6 +63,9 @@ $(document).ready(function () {
 
             // Trigger 5 day forecast
             getFive(long, lat);
+
+            // Trigger history function
+            setHistory(cityName);
         })
     }
 
@@ -101,6 +104,7 @@ $(document).ready(function () {
     }
 
     function getFive(long, lat) {
+        // Set API call
         var fiveQuery = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&units=imperial&appid=' + apiKey;
         $.ajax({
             url: fiveQuery,
@@ -128,8 +132,10 @@ $(document).ready(function () {
         })
     }
 
-    function getPast() {
-
+    function setHistory(cityName) {
+        var listHist = $('<li>' + cityName + '</li>');
+        $(listHist).addClass('list-group-item');
+        $('.list-group').append(listHist);
     }
 
     function clearContents() {
@@ -143,3 +149,10 @@ $(document).ready(function () {
  // getLocalData();
  // getUvIndex();
  //  fiveData.daily[i].temp.max + 
+//  <ul class="list-group">
+//   <li class="list-group-item">Cras justo odio</li>
+//   <li class="list-group-item">Dapibus ac facilisis in</li>
+//   <li class="list-group-item">Morbi leo risus</li>
+//   <li class="list-group-item">Porta ac consectetur ac</li>
+//   <li class="list-group-item">Vestibulum at eros</li>
+// </ul>
