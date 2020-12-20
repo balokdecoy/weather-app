@@ -16,7 +16,9 @@ var currentDate = dayjs().format('MM/DD/YYYY');
         }).then(function (response) { 
             clearContents();
             console.log(response);
-            // Create div where current conditions will render
+
+            // SET VARIABLES
+            // Div where current conditions will render
             var cityWeather = $("<div class=cityWeather>");
             // Weather image
             var imgWeather = $('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png" alt="weather icon">');
@@ -30,12 +32,13 @@ var currentDate = dayjs().format('MM/DD/YYYY');
             var humidity = $('<p>').text('Humidity: ' + response.main.humidity + "%");
             // Wind Speed
             var windSpeed = $('<p>').text('Wind Speed: ' + response.wind.speed + ' mph');
-            // Set longitude
+            // Longitude
             var long = response.coord.lon;
-            // Set latitude
+            // Latitude
             var lat = response.coord.lat;
-            // Define UV Index URL
+            // UV Index URL
             var uvQuery = 'http://api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + long + '&appid=' + apiKey;
+           
             // Call UV Index API
             $.ajax({
                 url: uvQuery,
@@ -43,10 +46,28 @@ var currentDate = dayjs().format('MM/DD/YYYY');
                 datatType: 'jsonp',
             }).then(function(data) {
                 console.log(data);
-                var currentUV = $('<span id="UV">UV Index: ' + data.value + '</span>');
+                var currentUV = $('<p>UV Index: </p>');
+                var uvIndex = $('<span>' + data.value + '</span>');
+                $(currentUV).append(uvIndex);
+                // Assign UV color coding class based on EPA guidelines
+                if (data.value < 3) {
+                    $(uvIndex).addClass('low');
+                }
+                else if (data.value >= 3 && data.value < 6 ) {
+                    $(uvIndex).addClass('moderate');
+                }
+                else if (data.value >= 6 && data.value < 8) {
+                    $(uvIndex).addClass('high');
+                }
+                else if (data.value >= 8 && data.value < 11) {
+                    $(uvIndex).addClass('veryHigh');
+                }
+                else {
+                    $(uvIndex).addClass('extreme');
+                }
+                // Send UV info to display div
                 cityWeather.append(currentUV);
             })
-
 
             // Add data elements to div
             cityWeather.append(current, imgWeather, currWeather, temp, humidity, windSpeed,);
