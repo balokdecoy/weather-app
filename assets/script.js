@@ -4,6 +4,7 @@ var currentDate = dayjs().format('MM/DD/YYYY');
  $(document).ready(function () {
     $('#submit').click(function (e) { 
         e.preventDefault();
+        $('.card').attr('style', 'visibility: visible');
         var cityName = $('#citySearch').val();
         console.log(cityName);
         var apiKey = '31935cf21b5d358b8ba4c4da65b29118';
@@ -80,14 +81,3 @@ var currentDate = dayjs().format('MM/DD/YYYY');
  function clearContents() {
      $('#todayForecast').text('');
  }
-
-
- // Req for current conditions: 
- // City Name
- // Date
- // Weather icon
- // Temperature
- // humidity
- // wind speed
- // UV index color-coded
- 
