@@ -5,8 +5,8 @@ var currentDate = dayjs().format('MM/DD/YYYY');
     $('#submit').click(function (e) { 
         e.preventDefault();
         $('.card').attr('style', 'visibility: visible');
+        
         var cityName = $('#citySearch').val();
-        console.log(cityName);
         var apiKey = '31935cf21b5d358b8ba4c4da65b29118';
         var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey;
         // Call local weather data
@@ -69,6 +69,9 @@ var currentDate = dayjs().format('MM/DD/YYYY');
                 // Send UV info to display div
                 cityWeather.append(currentUV);
             })
+
+            var addHistory = $('<ul><<button type="button" class="btn btn-primary">' + cityName + '</button></ul>');
+            $('.history').append(addHistory);
 
             // Add data elements to div
             cityWeather.append(current, imgWeather, currWeather, temp, humidity, windSpeed,);
