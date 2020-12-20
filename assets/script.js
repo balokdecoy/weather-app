@@ -19,7 +19,7 @@ $(document).ready(function () {
     });
 
     function getLocalWeather(cityName) {
-        clearContents();
+        clearContents(cityWeather);
         var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey;
         
         // Call local weather data
@@ -107,9 +107,12 @@ $(document).ready(function () {
             method: 'GET',
         }).then(function(fiveData) {
             console.log(fiveData);
-            for (var i = 0; i < 5; i++) {
+            for (var i = 1; i < 6; i++) {
                 console.log(fiveData.daily[i].weather[0].main);
-                
+                var dayDiv = $('<div class=col-2>Hello world</div>')
+                $(dayDiv).addClass('card');
+                $(dayDiv).attr('style', 'width: 18rem;');
+                $('.cardSpread').append(dayDiv);
             }
 
         })
@@ -120,7 +123,8 @@ $(document).ready(function () {
     }
 
     function clearContents() {
-        $('#todayForecast').text('');
+        $(cityWeather).empty();
+        $('.cardSpread').empty();
     }
 })
 
