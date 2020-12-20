@@ -8,7 +8,7 @@ var currentDate = dayjs().format('MM/DD/YYYY');
         var cityName = $('#citySearch').val();
         console.log(cityName);
         var apiKey = '31935cf21b5d358b8ba4c4da65b29118';
-        var queryURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey;
+        var queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey;
         // Call local weather data
         $.ajax({
             url: queryURL,
@@ -22,7 +22,7 @@ var currentDate = dayjs().format('MM/DD/YYYY');
             // Div where current conditions will render
             var cityWeather = $("<div class=cityWeather>");
             // Weather image
-            var imgWeather = $('<img src="http://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png" alt="weather icon">');
+            var imgWeather = $('<img src="https://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png" alt="weather icon">');
             // Location
             var current = $('<h1>').text(response.name + " " + "(" + currentDate + ") ");
             // Temperature
@@ -38,7 +38,7 @@ var currentDate = dayjs().format('MM/DD/YYYY');
             // Latitude
             var lat = response.coord.lat;
             // UV Index URL
-            var uvQuery = 'http://api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + long + '&appid=' + apiKey;
+            var uvQuery = 'https://api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + long + '&appid=' + apiKey;
            
             // Call UV Index API
             $.ajax({
