@@ -7,6 +7,9 @@ var apiKey = '31935cf21b5d358b8ba4c4da65b29118';
 // Div where current conditions will render
 var cityWeather = $("<div class=cityWeather>");
 
+// Past searches
+var pastSearches = [];
+
 $(document).ready(function () {
     // var prevCity = localStorage.getItem('city');
     // console.log(prevCity);
@@ -56,7 +59,10 @@ $(document).ready(function () {
             $('#todayForecast').append(cityWeather);
 
             // Set local storage
-            localStorage.setItem('city', cityName);
+            if (localStorage != null) {
+                var storedCity = JSON.parse(localStorage.getItem('city'));
+                localStorage.setItem('city', JSON.stringify(storedCity));
+            }
 
             // Trigger UV function
             getUV(long, lat);
@@ -64,8 +70,10 @@ $(document).ready(function () {
             // Trigger 5 day forecast
             getFive(long, lat);
 
-            // Trigger history function
-            setHistory(cityName);
+            // Trigger history function if not previously searched
+            if (!pastSearches.includes(cityName)) {
+                setHistory(cityName)
+            };
         })
     }
 
@@ -132,17 +140,35 @@ $(document).ready(function () {
         })
     }
 
+    // Add previous searches to a search history list
     function setHistory(cityName) {
         var listHist = $('<li>' + cityName + '</li>');
         $(listHist).addClass('list-group-item');
         $('.list-group').append(listHist);
+        pastSearches.push(cityName);
+        console.log(pastSearches);
     }
 
+    // Trigger getLocalWeather function with search history selection
+    $('.list-group').click(function (e) { 
+        e.preventDefault();
+        cityName = ($(e.target).text());
+
+        getLocalWeather(cityName);
+        
+    });
+
+    // Clear contents to reset local weather display
     function clearContents() {
         $(cityWeather).empty();
         $('.cardSpread').empty();
     }
+
+    
+    
 })
+
+
 
  // Event.target.text.val(); 
  // Could set value equal to city name
