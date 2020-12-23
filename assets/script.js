@@ -1,19 +1,25 @@
-// Set date
-var currentDate = dayjs().format('MM/DD/YYYY');
-
-// Set API key 
-var apiKey = '31935cf21b5d358b8ba4c4da65b29118';
-
-// Div where current conditions will render
-var cityWeather = $("<div class=cityWeather>");
-
-// Past searches
-var pastSearches = [];
-
 $(document).ready(function () {
-    // var prevCity = localStorage.getItem('city');
-    // console.log(prevCity);
-    // getLocalWeather(prevCity);
+    // Set date
+    var currentDate = dayjs().format('MM/DD/YYYY');
+
+    // Set API key 
+    var apiKey = '31935cf21b5d358b8ba4c4da65b29118';
+
+    // Div where current conditions will render
+    var cityWeather = $("<div class=cityWeather>");
+
+    // Past searches
+    var pastSearches = [];
+
+    // Retrieve last search from local storage
+    var getCity = localStorage.getItem('city');
+    if (getCity != null) {
+        cityName = getCity;
+        $('.card').attr('style', 'visibility: visible');
+        getLocalWeather(cityName);
+    }
+    
+    // Set local weather data to user's search request
     $('#submit').click(function (e) { 
         e.preventDefault();
         $('.card').attr('style', 'visibility: visible');
@@ -51,18 +57,13 @@ $(document).ready(function () {
             var long = response.coord.lon;
             // Latitude
             var lat = response.coord.lat;
-            // UV Index URL
-            var uvQuery = 'https://api.openweathermap.org/data/2.5/uvi?lat=' + lat + '&lon=' + long + '&appid=' + apiKey;
             // Add data elements to div
             cityWeather.append(current, imgWeather, currWeather, temp, humidity, windSpeed,);
             // Add div to html
             $('#todayForecast').append(cityWeather);
 
             // Set local storage
-            if (localStorage != null) {
-                var storedCity = JSON.parse(localStorage.getItem('city'));
-                localStorage.setItem('city', JSON.stringify(storedCity));
-            }
+            var storedCity = localStorage.setItem('city', cityName);    
 
             // Trigger UV function
             getUV(long, lat);
@@ -70,7 +71,7 @@ $(document).ready(function () {
             // Trigger 5 day forecast
             getFive(long, lat);
 
-            // Trigger history function if not previously searched
+            // Trigger history function if city not previously searched
             if (!pastSearches.includes(cityName)) {
                 setHistory(cityName)
             };
@@ -140,22 +141,19 @@ $(document).ready(function () {
         })
     }
 
-    // Add previous searches to a search history list
+    // Add previous searches to search history list
     function setHistory(cityName) {
         var listHist = $('<li>' + cityName + '</li>');
         $(listHist).addClass('list-group-item');
         $('.list-group').append(listHist);
         pastSearches.push(cityName);
-        console.log(pastSearches);
     }
 
     // Trigger getLocalWeather function with search history selection
     $('.list-group').click(function (e) { 
         e.preventDefault();
         cityName = ($(e.target).text());
-
         getLocalWeather(cityName);
-        
     });
 
     // Clear contents to reset local weather display
@@ -163,22 +161,4 @@ $(document).ready(function () {
         $(cityWeather).empty();
         $('.cardSpread').empty();
     }
-
-    
-    
 })
-
-
-
- // Event.target.text.val(); 
- // Could set value equal to city name
- // getLocalData();
- // getUvIndex();
- //  fiveData.daily[i].temp.max + 
-//  <ul class="list-group">
-//   <li class="list-group-item">Cras justo odio</li>
-//   <li class="list-group-item">Dapibus ac facilisis in</li>
-//   <li class="list-group-item">Morbi leo risus</li>
-//   <li class="list-group-item">Porta ac consectetur ac</li>
-//   <li class="list-group-item">Vestibulum at eros</li>
-// </ul>
