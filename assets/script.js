@@ -43,7 +43,6 @@ $(document).ready(function () {
             datatType: 'jsonp',
         }).then(function (response) { 
             clearContents();
-            console.log(response);
 
             // SET VARIABLES
             // Weather image
