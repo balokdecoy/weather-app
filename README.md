@@ -42,7 +42,7 @@ User searches also create a history list on the left side of the screen. This li
 
 [Acknowledgments]
 
-This program uses the OpenWeather API to gather weather data. Visit OpenWeather at: https://github.com/balokdecoy/weather-app
+This program uses the OpenWeather API to gather weather data. Visit OpenWeather at: https://openweathermap.org/
 
 This program uses the dayJS API to gather dynamically updating date info. Visit dayJS at: https://day.js.org/en/
 
