@@ -17,9 +17,13 @@ body {
 }
 
 .card {
-    float: left;
+    float: right;
     width: 100%;
     margin-top: 30px;
+}
+
+.history {
+    float: left;
 }
 
 .low {
@@ -50,4 +54,13 @@ body {
     background-color: purple;
     color: white;
     padding: 5px;
+}
+
+#fiveHeader {
+    font-size: large;
+    font-weight: bolder;
+}
+
+.list-group {
+    cursor: pointer;
 }

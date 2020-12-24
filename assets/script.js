@@ -122,7 +122,8 @@ $(document).ready(function () {
             console.log(fiveData);
             for (var i = 1; i < 6; i++) {
                 // Set five day forecast variables
-                var dayDiv = $('<div class=col-2></div>')
+                var dayDiv = $('<div class="col-2 card bg-info mb-3"></div>')
+                $(dayDiv).attr('style', 'color: white; margin: auto;');
                 var day = dayjs().date();
                 var adjDay = (day + i);
                 var month = dayjs().format('MM');
