@@ -21,10 +21,15 @@ $(document).ready(function () {
     
     // Set local weather data to user's search request
     $('#submit').click(function (e) { 
-        e.preventDefault();
+        e.preventDefault();        
         $('.card').attr('style', 'visibility: visible');
         var cityName = $('#citySearch').val();
-        getLocalWeather(cityName);
+        if ($('#citySearch').val() === '') {
+            alert("Please enter a valid city name.");
+        }
+        else {
+            getLocalWeather(cityName);
+        }
     });
 
     function getLocalWeather(cityName) {
